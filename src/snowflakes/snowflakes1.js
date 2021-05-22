@@ -1,5 +1,6 @@
 
 let snowflakes = []; // array to hold snowflake objects
+let heap = 0;
 
 function setup() {
   createCanvas(500, 500);
@@ -8,11 +9,12 @@ function setup() {
 }
 
 function draw() {
-  background(89);
-  let t = frameCount / 60; // update time
+  background(14,20,40);
+  let t = frameCount / 150; // update time
+  
 
   // create a random number of snowflakes each frame
-  for (let i = 0; i < random(5); i++) {
+  for (let i = 0; i < random(9); i++) {
     snowflakes.push(new snowflake()); // append snowflake object
   }
 
@@ -30,6 +32,7 @@ function snowflake() {
   this.posY = random(-50, 0);
   this.initialangle = random(0, 2 * PI);
   this.size = random(2, 5);
+  
 
   // radius of snowflake spiral
   // chosen so the snowflakes are uniformly spread out in area
@@ -44,13 +47,19 @@ function snowflake() {
     // different size snowflakes fall at slightly different y speeds
     this.posY += pow(this.size, 0.5);
 
-    // delete snowflake if past end of screen
+    this.layOnGround();
+    
+  };
+
+  // let snowflake ilay on the ground    
+  this.layOnGround = function(){
     
     if (this.posY > height) {
       let index = snowflakes.indexOf(this);
-      snowflakes.splice(index, 1);
+
+      heap = heap + random(0.0003,0.002);
+      this.posY = height - heap/random(1,5);
     }
-    
   };
 
   this.display = function() {
