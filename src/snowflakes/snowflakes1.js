@@ -4,12 +4,12 @@ let heap = 0;
 
 function setup() {
   createCanvas(500, 500);
-  fill(240);
+  fill(random(220,253));
   noStroke();
 }
 
 function draw() {
-  background(14,20,40);
+  background(14,random(20),40);
   let t = frameCount / 150; // update time
   
 
@@ -57,8 +57,13 @@ function snowflake() {
     if (this.posY > height) {
       let index = snowflakes.indexOf(this);
 
-      heap = heap + random(0.0003,0.002);
-      this.posY = height - heap/random(1,5);
+      heap += random(0.001,0.006);
+      //heap += height + random(0.004);
+      
+      this.posY = height - random(heap);
+      //this.posY = heap;
+      this.posX = this.posX + (random(-100,100));
+      //ellipse(this.posX, heap, this.size*1.2);
     }
   };
 
