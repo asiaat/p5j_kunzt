@@ -20,14 +20,20 @@ function draw(){
     center_x = h / 2;
     center_y = h / 2.4;   
     
-    modal = timerValue%16; 
-   
-    if(modal > 8){
-        drawHorizOcillatedRing(radius,center_x,center_y);
-    } else {        
-        drawVertOcillatedRing(radius,center_x,center_y);       
-        
+    modal = timerValue%20; 
+    
+    if(modal > 10){
+         drawHorizOcillatedRing(radius,center_x,center_y);
+    } else {       
+        if(modal >= 7 & modal <= 9) {
+           
+           drawVertOcillatedRing(radius,center_x,center_y); 
+        }
+        else {
+            drawRandomEdge(radius,center_x,center_y,80);
+        }            
     }
+    
     
     //text('0:0' + timerValue, width / 2, height / 2);
     //text('modal: '+modal, width / 2, height / 2);
@@ -36,13 +42,25 @@ function draw(){
 
 }
 
-function drawRandomShape(radius, cx,cy){
+function drawRandomEdge(radius, cx,cy, move){
+    //aligne(CENTER);
     beginShape();
     for(let i = 0; i < total_degrees; i = i + 2 ){
         fill(random(230),random(250),200,60);
-        x = cx + radius * cos(radians(i)) + random(7);
-        y = cy + radius * sin(radians(i)) + random(101);
-        curveVertex(random(x,y), random(y,x),30);                     
+        x = cx + radius * cos(radians(i)) + random(move) -30;
+        y = cy + radius * sin(radians(i)) + random(move);
+        curveVertex(x,y,30);                     
+    }   
+    endShape(CLOSE);
+}
+
+function drawRandomShape(radius, cx,cy, move){
+    beginShape();
+    for(let i = 0; i < total_degrees; i = i + 2 ){
+        fill(random(230),random(250),200,60);
+        x = cx + radius * cos(radians(i)) + random(move);
+        y = cy + radius * sin(radians(i)) + random(move);
+        curveVertex(random(x),random(y),30);                     
     }   
     endShape(CLOSE);
 }
