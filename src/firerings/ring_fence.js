@@ -14,9 +14,7 @@ function draw(){
     background(random(100),random(200),200,60)
     radius   = h / 3;
     center_x = h / 2;
-    center_y = h / 2.4;
-
-    
+    center_y = h / 2.4;    
 
     beginShape();
     for(let i = 0; i < total_degrees; i = i + 2 ){
