@@ -21,26 +21,32 @@ function draw(){
     center_y = h / 2.4;   
     
     modal = timerValue%20; 
-        
-    drawRandomEdge(radius,center_x,center_y,80);
-    //drawRandomEdge(radius-70,center_x+30,center_y+30,30);
-    //drawRandomEdge(radius-120,center_x+30,center_y+30,30);
-   
-    text('0:0' + timerValue, width / 2, height / 2);
+    
+    if(modal > 10){
+         drawHorizOcillatedRing(radius,center_x,center_y);
+    } else {       
+        if(modal >= 7 & modal <= 9) {
+           
+           drawVertOcillatedRing(radius,center_x,center_y); 
+        }
+        else {
+            drawRandomEdge(radius,center_x,center_y,80);
+        }            
+    }
+     
+    //text('0:0' + timerValue, width / 2, height / 2);
     //text('modal: '+modal, width / 2, height / 2);
 
 
 }
 
 function drawRandomEdge(radius, cx,cy, move){
-    let changeRadius = 10000000;
+    //aligne(CENTER);
     beginShape();
-    
     for(let i = 0; i < total_degrees; i = i + 2 ){
-        changeRadius **= i;
         fill(random(230),random(250),200,60);
-        x = cx + changeRadius * cos(radians(i)) + random(move) -30;
-        y = cy + changeRadius * sin(radians(i)) + random(move);
+        x = cx + radius * cos(radians(i)) + random(move) -30;
+        y = cy + radius * sin(radians(i)) + random(move);
         curveVertex(x,y,20);                     
     }   
     endShape(CLOSE);
