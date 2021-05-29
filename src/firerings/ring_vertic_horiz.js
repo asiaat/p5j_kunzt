@@ -2,15 +2,12 @@ let w = 600;
 let h = 600;
 total_degrees = 360;
 revert_count = 0;
-var timerValue = 100;
 
 function setup () {
     createCanvas(w,h);
-    background(100);
     noFill();
     stroke(255);
-    frameRate(10)
-    setInterval(timeIt, 1000);
+    frameRate(10)   
     textAlign(CENTER);
 }
 
@@ -18,22 +15,18 @@ function draw(){
     background(random(100),random(200),200,60)
     radius   = h / 3;
     center_x = h / 2;
-    center_y = h / 2.4;   
+    center_y = h / 2.4;       
     
-    modal = timerValue%16; 
+    let step = frameCount % 100;
    
-    if(modal > 8){
+    if(step < 50){
         drawHorizOcillatedRing(radius,center_x,center_y);
     } else {        
-        drawVertOcillatedRing(radius,center_x,center_y);       
-        
+        drawVertOcillatedRing(radius,center_x,center_y);        
     }
     
-    //text('0:0' + timerValue, width / 2, height / 2);
-    //text('modal: '+modal, width / 2, height / 2);
     
-
-
+    //text('step: '+step, width / 2, height / 2);
 }
 
 function drawRandomShape(radius, cx,cy){
@@ -68,9 +61,3 @@ function drawHorizOcillatedRing(radius, cx,cy){
     }   
     endShape(CLOSE);
 }
-
-function timeIt() {
-    if (timerValue > 0) {
-      timerValue--;
-    }
-  }

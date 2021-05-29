@@ -10,37 +10,39 @@ function setup () {
     noFill();
     stroke(255);
     frameRate(10)
-    setInterval(timeIt, 1000);
+    setInterval(timeIt, 600);
     textAlign(CENTER);
 }
 
 function draw(){
-    background(random(100),random(200),200,60)
+    //background(random(100),random(200),200,60)
+    background(100,100,80,60)
     radius   = h / 3;
     center_x = h / 2;
     center_y = h / 2.4;   
     
     modal = timerValue%20; 
-        
-    drawRandomEdge(radius,center_x,center_y,80);
-    //drawRandomEdge(radius-70,center_x+30,center_y+30,30);
-    //drawRandomEdge(radius-120,center_x+30,center_y+30,30);
+    let step = frameCount % 160;
+    
+    drawRandomEdge(radius,center_x,center_y,step);
+     
    
-    text('0:0' + timerValue, width / 2, height / 2);
-    //text('modal: '+modal, width / 2, height / 2);
+    text(timerValue, width / 2, height / 2);
+    text('step : '+step, width / 3, height / 2);
 
 
 }
 
 function drawRandomEdge(radius, cx,cy, move){
-    let changeRadius = 10000000;
-    beginShape();
+    
+    beginShape(CENTER);
     
     for(let i = 0; i < total_degrees; i = i + 2 ){
-        changeRadius **= i;
-        fill(random(230),random(250),200,60);
-        x = cx + changeRadius * cos(radians(i)) + random(move) -30;
-        y = cy + changeRadius * sin(radians(i)) + random(move);
+        //changeRadius **= i;
+        //fill(random(230),random(250),200,60);
+        fill(200,200,20,10);
+        x = cx + radius * cos(radians(i)) + random(move);
+        y = cy + radius * sin(radians(i)) + random(move);
         curveVertex(x,y,20);                     
     }   
     endShape(CLOSE);
